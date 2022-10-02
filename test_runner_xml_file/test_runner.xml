@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="automated_tests.utils.Listener"/>
         <listener class-name="automated_tests.utils.CustomListener"/>
-        <listener class-name="automated_tests.utils.RetryAnalyzer"/>
+<!--for all fail tests-->
 <!--        <listener class-name="automated_tests.utils.AnnotationTransformer"/>-->
     </listeners>
     <test name="first task">
