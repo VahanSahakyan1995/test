@@ -29,7 +29,7 @@ public class CreatePage extends BasePage {
 
     public void clickAcceptAllCookies() {
         if (isCookiesFooterShow()) {
-            click(getBrowser().untilElementToBeClickable(By.id("ontrust-accept-btn-handler")));
+            click(getBrowser().untilElementToBeClickable(By.id("onetrust-accept-btn-handler")));
             getBrowser().untilIsNotDisplayed(By.id("onetrust-accept-btn-handler"));
         }
     }
