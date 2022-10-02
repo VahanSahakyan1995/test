@@ -1,0 +1,210 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependenciesVersion}"
+    id 'com.github.erdi.webdriver-binaries' version "${webDriverVersion}"
+    id "io.freefair.lombok" version "${lombokVersion}"
+    id "net.foragerr.jmeter" version "${jmeterVersion}"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+
+def enableEdge = false
+def enableChrome = true
+def enableGecko = false
+def enableOpera = false
+
+def chromeDriverVersion = '104.0.5112.102'
+def geckoDriverVersion = '0.30.0'
+def edgeDriverVersion = '6.17134'
+def operaDriverVersion = '2.30'
+def webDriverDownloadRoot = "${projectDir}/.gradle"
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+    implementation group: 'org.testng', name: 'testng', version: "${testingVersion}"
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: "${log4jVersion}"
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: "${seleniumDriver}"
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: "${seleniumDriver}"
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: "${seleniumDriver}"
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-edge-driver
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-edge-driver', version: "${seleniumDriver}"
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-safari-driver
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-safari-driver', version: "${seleniumDriver}"
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-opera-driver
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-opera-driver', version: "${seleniumDriver}"
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation group: 'commons-io', name: 'commons-io', version: "${commonsIOVersion}"
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-core
+    implementation group: 'org.springframework', name: 'spring-core', version: "${springVersion}"
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-beans
+    implementation group: 'org.springframework', name: 'spring-beans', version: "${springVersion}"
+
+    // https://mvnrepository.com/artifact/com.aventstack/extentreports
+    implementation group: 'com.aventstack', name: 'extentreports', version: "${reportsVersion}"
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: "${junitVersion}"
+
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation group: 'org.json', name: 'json', version: "${jsonVersion}"
+
+    // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util
+    implementation group: 'org.apache.tomcat', name: 'tomcat-util', version: "${tomcatUtilVersion}"
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.29'
+
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+}
+
+//apply from: 'common.gradle'
+
+bootJar {
+    archiveBaseName.value('test')
+    archiveVersion.value('0.1.0')
+    manifest {
+        attributes(
+                'Implementation-Title':'Integration Tests',
+                'Implementation-Version': '0.1.0',
+                'Class-Path': configurations.runtimeClasspath.files.collect { it.getName() }.join(' '),
+                'Start-Class': 'automated_tests.UATestApp'
+        )
+    }
+}
+
+webdriverBinaries {
+    if (enableChrome) {
+        chromedriver = "${chromeDriverVersion}"
+    }
+    if (enableGecko) {
+        geckodriver = "${geckoDriverVersion}"
+    }
+    if (enableEdge) {
+        edgedriver = "${edgeDriverVersion}"
+    }
+    if (enableOpera) {
+        operadriver = "${operaDriverVersion}"
+    }
+    downloadRoot = file("${webDriverDownloadRoot}")
+    driverUrlsConfiguration = resources.text.fromFile("${projectDir}/drivers.json")
+}
+
+task copyWebDrivers() {
+    mustRunAfter(build)
+    doLast {
+        description 'Copy WebDriver'
+        def gradlePath = new File("${project.getProjectDir().path}/.gradle")
+        if (gradlePath.exists()) {
+            if (!new File("${project.buildDir}/webdriver/").exists()) {
+                mkdir("${project.buildDir}/webdriver/")
+            }
+            def chromeDriverPath = new File("${gradlePath.path}/webdriver/chromedriver/${chromeDriverVersion}/")
+            if(enableChrome && chromeDriverPath.exists()) {
+                println("$chromeDriverPath will be copied into ${project.buildDir}/webdriver/")
+                chromeDriverPath.eachDir { archDir ->
+                    archDir.eachDir { buildDir ->
+                        buildDir.listFiles().each { file ->
+                            if (file.name == "chromedriver") {
+                                copy {
+                                    from file
+                                    into "${project.buildDir}/webdriver/"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            def geckoDriverPath = new File("${gradlePath.path}/webdriver/geckodriver/${geckoDriverVersion}/")
+            if(enableGecko && geckoDriverPath.exists()) {
+                println("$geckoDriverPath will be copied into ${project.buildDir}/webdriver/")
+                geckoDriverPath.eachDir { archDir ->
+                    archDir.eachDir { buildDir ->
+                        buildDir.listFiles().each { file ->
+                            if (file.name == "geckodriver") {
+                                copy {
+                                    from file
+                                    into "${project.buildDir}/webdriver/"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            def edgeDriverPath = new File("${gradlePath.path}/webdriver/edgedriver/${edgeDriverVersion}/")
+            if (enableEdge && edgeDriverPath.exists()) {
+                println("$edgeDriverPath will be copied into ${project.buildDir}/webdriver/")
+                edgeDriverPath.eachDir { archDir ->
+                    archDir.eachDir { buildDir ->
+                        buildDir.listFiles().each { file ->
+                            if (file.name == "edgedriver") {
+                                copy {
+                                    from file
+                                    into "${project.buildDir}/webdriver/"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            def operaDriverPath = new File("${gradlePath.path}/webdriver/operadriver/${operaDriverVersion}/")
+            if (enableOpera && operaDriverPath.exists()) {
+                println("$operaDriverPath will be copied into ${project.buildDir}/webdriver/")
+                operaDriverPath.eachDir { archDir ->
+                    archDir.eachDir { buildDir ->
+                        buildDir.listFiles().each { file ->
+                            if (file.name == "operadriver") {
+                                copy {
+                                    from file
+                                    into "${project.buildDir}/webdriver/"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+build.finalizedBy(copyWebDrivers)
+
+jmeter {
+    jmTestFiles = [file("src/test/jmeter/test2.jmx")]
+    jmSystemPropertiesFiles = [file("src/test/jmeter/user.properties")]
+    enableExtendedReports = true
+}
+
+clean {
+    delete file("${project.buildDir}")
+    delete file("${webDriverDownloadRoot}")
+}

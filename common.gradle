@@ -1,0 +1,45 @@
+clean {
+    delete "${projectDir}/out"
+    delete "${projectDir}/logs"
+    delete "${projectDir}/build"
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+    implementation group: 'org.testng', name: 'testng', version: "${testingVersion}"
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    implementation group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+
+    // https://mvnrepository.com/artifact/commons-validator/commons-validator
+    testImplementation group: 'commons-validator', name: 'commons-validator', version: "${commonsValidatorVersion}"
+
+    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "${jaxbApiVersion}"
+
+
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+javadoc {
+    //options.addBooleanOption('html5', true)
+    destinationDir = file("$project.buildDir/JavaDoc")
+}
+
+loadConfiguration()
+
+def loadConfiguration() {
+    def environment = hasProperty('env') ? env : 'dev'
+}

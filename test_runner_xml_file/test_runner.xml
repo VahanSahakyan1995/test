@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="first_cases" preserve-order="true" verbose="10" thread-count="1">
+    <listeners>
+        <listener class-name="automated_tests.utils.Listener"/>
+        <listener class-name="automated_tests.utils.CustomListener"/>
+        <listener class-name="automated_tests.utils.RetryAnalyzer"/>
+<!--        <listener class-name="automated_tests.utils.AnnotationTransformer"/>-->
+    </listeners>
+    <test name="first task">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+            <class name="automated_tests.automated_tests_list.task.FirstTask"/>
+        </classes>
+    </test>
+</suite>

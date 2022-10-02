@@ -1,0 +1,54 @@
+Manifest-Version: 1.0
+Implementation-Title: Integration Tests
+Implementation-Version: 0.1.0
+Class-Path: testng-7.6.0.jar spring-boot-starter-log4j2-2.7.0.jar seleni
+ um-java-4.2.2.jar selenium-chrome-driver-4.2.2.jar selenium-firefox-dri
+ ver-4.2.2.jar selenium-edge-driver-4.2.2.jar selenium-safari-driver-4.2
+ .2.jar selenium-opera-driver-4.2.2.jar commons-io-2.11.0.jar spring-bea
+ ns-5.3.20.jar spring-core-5.3.20.jar extentreports-3.0.7.jar json-20220
+ 320.jar tomcat-util-10.1.0-M15.jar jackson-annotations-2.13.3.jar jacks
+ on-core-2.13.3.jar jackson-databind-2.13.3.jar mysql-connector-java-8.0
+ .29.jar json-simple-1.1.1.jar javax.mail-1.6.2.jar selenium-devtools-v1
+ 00-4.2.2.jar selenium-devtools-v101-4.2.2.jar selenium-devtools-v102-4.
+ 2.2.jar selenium-devtools-v85-4.2.2.jar selenium-ie-driver-4.1.4.jar se
+ lenium-support-4.1.4.jar selenium-chromium-driver-4.2.2.jar selenium-re
+ mote-driver-4.1.4.jar auto-service-1.0.1.jar selenium-http-4.1.4.jar au
+ to-common-1.2.jar guava-31.1-jre.jar jsr305-3.0.2.jar log4j-slf4j-impl-
+ 2.17.2.jar jul-to-slf4j-1.7.36.jar async-http-client-2.12.3.jar async-h
+ ttp-client-netty-utils-2.12.3.jar slf4j-api-1.7.36.jar jcommander-1.82.
+ jar jquery-3.6.0.jar log4j-core-2.17.2.jar log4j-jul-2.17.2.jar seleniu
+ m-json-4.2.2.jar selenium-api-4.1.4.jar auto-service-annotations-1.0.1.
+ jar spring-jcl-5.3.20.jar freemarker-2.3.31.jar mongodb-driver-3.3.0.ja
+ r httpmime-4.5.13.jar httpclient-4.5.13.jar jsoup-1.9.2.jar gson-2.9.0.
+ jar tomcat-juli-10.1.0-M15.jar junit-4.13.2.jar activation-1.1.jar log4
+ j-api-2.17.2.jar netty-handler-proxy-4.1.77.Final.jar netty-codec-http-
+ 4.1.77.Final.jar netty-transport-native-epoll-4.1.77.Final.jar netty-tr
+ ansport-native-epoll-4.1.77.Final-linux-x86_64.jar netty-transport-clas
+ ses-epoll-4.1.77.Final.jar netty-transport-native-kqueue-4.1.77.Final.j
+ ar netty-transport-native-kqueue-4.1.77.Final-osx-x86_64.jar netty-tran
+ sport-classes-kqueue-4.1.77.Final.jar netty-transport-native-unix-commo
+ n-4.1.77.Final.jar netty-reactive-streams-2.0.4.jar netty-handler-4.1.7
+ 7.Final.jar netty-codec-socks-4.1.77.Final.jar netty-codec-4.1.77.Final
+ .jar netty-transport-4.1.77.Final.jar netty-buffer-4.1.77.Final.jar net
+ ty-resolver-4.1.77.Final.jar netty-common-4.1.77.Final.jar opentelemetr
+ y-exporter-logging-1.13.0.jar opentelemetry-sdk-extension-autoconfigure
+ -1.13.0-alpha.jar opentelemetry-sdk-extension-autoconfigure-spi-1.13.0.
+ jar opentelemetry-sdk-1.13.0.jar opentelemetry-sdk-trace-1.13.0.jar ope
+ ntelemetry-sdk-metrics-1.13.0-alpha.jar opentelemetry-sdk-logs-1.13.0-a
+ lpha.jar opentelemetry-sdk-common-1.13.0.jar opentelemetry-semconv-1.13
+ .0-alpha.jar opentelemetry-api-1.13.0.jar opentelemetry-context-1.13.0.
+ jar jtoml-2.0.0.jar byte-buddy-1.12.10.jar commons-exec-1.3.jar failure
+ access-1.0.1.jar listenablefuture-9999.0-empty-to-avoid-conflict-with-g
+ uava.jar checker-qual-3.12.0.jar error_prone_annotations-2.11.0.jar j2o
+ bjc-annotations-1.3.jar mongodb-driver-core-4.6.0.jar bson-record-codec
+ -4.6.0.jar bson-4.6.0.jar httpcore-4.4.15.jar commons-codec-1.15.jar ha
+ mcrest-core-2.2.jar reactive-streams-1.0.3.jar jakarta.activation-1.2.2
+ .jar failsafe-3.2.3.jar hamcrest-2.2.jar
+Start-Class: automated_tests.UATestApp
+Main-Class: org.springframework.boot.loader.JarLauncher
+Spring-Boot-Version: 2.7.0
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Spring-Boot-Classpath-Index: BOOT-INF/classpath.idx
+Spring-Boot-Layers-Index: BOOT-INF/layers.idx
+
