@@ -13,4 +13,10 @@
             <class name="automated_tests.automated_tests_list.task.FirstTask"/>
         </classes>
     </test>
+    <test name="second task">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+            <class name="automated_tests.automated_tests_list.task.SecondTask"/>
+        </classes>
+    </test>
 </suite>
