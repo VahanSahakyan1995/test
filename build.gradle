@@ -85,6 +85,19 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+
+    // https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.2.0'
+
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.2.0'
+
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    implementation group: 'io.rest-assured', name: 'json-path', version: '5.2.0'
+
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    implementation group: 'io.rest-assured', name: 'xml-path', version: '5.2.0'
+
 }
 
 //apply from: 'common.gradle'
