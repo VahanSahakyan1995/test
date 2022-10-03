@@ -3,6 +3,7 @@ package automated_tests.pages.create;
 import automated_tests.browser.Browser;
 import automated_tests.configuration.AppConfig;
 import automated_tests.pages.base.BasePage;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,15 +17,9 @@ public class CreatePage extends BasePage {
         return getBrowser().untilIsDisplayed(By.id("onetrust-accept-btn-handler"));
     }
 
-    public boolean isTourWindowShow() {
-        return getBrowser().untilIsDisplayed(By.xpath("/html/body/div[11]/div/div/div[2]"));
-    }
-
     public void closeTourWindow() {
-        if (isTourWindowShow()) {
-            click(getBrowser().untilElementToBeClickable(By.xpath("/html/body/div[11]/div/div/div[2]/button")));
-            getBrowser().untilIsNotDisplayed(By.xpath("/html/body/div[11]/div/div/div[2]"));
-        }
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-testid='hints-close']")));
+        Assert.assertTrue(getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='hints-main']")));
     }
 
     public void clickAcceptAllCookies() {

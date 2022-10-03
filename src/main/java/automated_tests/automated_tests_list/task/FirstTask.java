@@ -16,10 +16,10 @@ public class FirstTask extends Base {
         createPage.closeTourWindow();
     }
 
-//    @Test(priority = 2, dependsOnMethods = "navigateToTheCreatePage", retryAnalyzer = RetryAnalyzer.class)
-//    public void clickUnExcitableNewProjectButton() {
-//        createPage.clickNewProject();
-//    }
+    @Test(priority = 2, dependsOnMethods = "navigateToTheCreatePage", retryAnalyzer = RetryAnalyzer.class)
+    public void clickUnExcitableNewProjectButton() {
+        createPage.clickNewProject();
+    }
 
     @Test(priority = 3, dependsOnMethods = "navigateToTheCreatePage")
     public void clickSeeAllTemplates() {

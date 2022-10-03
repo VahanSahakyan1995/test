@@ -9,8 +9,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
 public class SecondTask extends Base {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -25,7 +23,7 @@ public class SecondTask extends Base {
                 .assertThat()
                 .statusCode(200)
                 .body("token", Matchers.notNullValue())
-                .body(JsonSchemaValidator.matchesJsonSchema(new File(AppConfig.getInstance().getRestAssuredJson())));
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema.json"));
     }
 
 }

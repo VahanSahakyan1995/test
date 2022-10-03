@@ -17,8 +17,6 @@ public final class AppConfig {
 
     private String restAssuredUrl;
 
-    private String restAssuredJson;
-
     private boolean headless;
 
     private long implicitTime;
@@ -51,7 +49,6 @@ public final class AppConfig {
             this.fakePasswords.add(new FakePassword());
             this.driverUrl = prop.getProperty("webdriver.path");
             this.restAssuredUrl = prop.getProperty("restAssured.url");
-            this.restAssuredJson = prop.getProperty("restAssured.json");
             this.baseUrl = prop.getProperty("test.base.url");
             this.headless = Boolean.parseBoolean(prop.getProperty("webdriver.headless"));
             this.implicitTime = Long.parseLong(prop.getProperty("implicit.wait.time"));
@@ -78,10 +75,6 @@ public final class AppConfig {
 
     public String getRestAssuredUrl() {
         return restAssuredUrl;
-    }
-
-    public String getRestAssuredJson() {
-        return restAssuredJson;
     }
 
     public String getBaseUrl() {
