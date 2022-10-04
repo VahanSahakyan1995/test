@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class CreatePage extends BasePage {
 
     public CreatePage(Browser<WebDriver> browser) {
-        super(browser, AppConfig.getInstance().getBaseUrl(), true);
+        super(browser, AppConfig.getInstance().getCreateUrl(), true);
     }
 
     public boolean isCookiesFooterShow() {

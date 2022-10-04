@@ -15,6 +15,8 @@ public final class AppConfig {
 
     private String baseUrl;
 
+    private String createUrl;
+
     private String restAssuredUrl;
 
     private boolean headless;
@@ -50,6 +52,7 @@ public final class AppConfig {
             this.driverUrl = prop.getProperty("webdriver.path");
             this.restAssuredUrl = prop.getProperty("restAssured.url");
             this.baseUrl = prop.getProperty("test.base.url");
+            this.createUrl = prop.getProperty("test.create.url");
             this.headless = Boolean.parseBoolean(prop.getProperty("webdriver.headless"));
             this.implicitTime = Long.parseLong(prop.getProperty("implicit.wait.time"));
             this.explicitTime = Long.parseLong(prop.getProperty("explicit.wait.time"));
@@ -79,6 +82,10 @@ public final class AppConfig {
 
     public String getBaseUrl() {
         return baseUrl;
+    }
+
+    public String getCreateUrl() {
+        return createUrl;
     }
 
     public boolean isHeadless() {

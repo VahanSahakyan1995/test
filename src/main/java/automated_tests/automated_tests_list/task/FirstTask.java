@@ -10,6 +10,9 @@ public class FirstTask extends Base {
 
     private CreatePage createPage;
 
+    //Precondition
+    //User should be logged out
+
     @Test(priority = 1)
     public void navigateToTheCreatePage() {
         createPage = new CreatePage(getBrowser());
@@ -57,4 +60,17 @@ public class FirstTask extends Base {
         Assert.assertTrue(createPage.isPhotosDisplay());
         createPage.clickInAnyPhoto();
     }
+
+    //Precondition
+    //User should be in logged in state
+
+    @Test(priority = 8)
+    public void login() {
+        createPage.closeUsingInstrumentWindow();
+        Assert.assertTrue(createPage.isUsingInstrumentWindowClose());
+        createPage.openPhotos();
+        Assert.assertTrue(createPage.isPhotosDisplay());
+        createPage.clickInAnyPhoto();
+    }
+
 }
