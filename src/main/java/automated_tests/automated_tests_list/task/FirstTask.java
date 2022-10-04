@@ -1,7 +1,9 @@
 package automated_tests.automated_tests_list.task;
 
 import automated_tests.automated_tests_list.base.Base;
+import automated_tests.pages.base.PicsartBasePage;
 import automated_tests.pages.create.CreatePage;
+import automated_tests.pages.settings.SettingsPage;
 import automated_tests.utils.RetryAnalyzer;
 import org.junit.Assert;
 import org.testng.annotations.Test;
@@ -9,6 +11,8 @@ import org.testng.annotations.Test;
 public class FirstTask extends Base {
 
     private CreatePage createPage;
+    private PicsartBasePage picsartBasePage;
+    private SettingsPage settingsPage;
 
     //Precondition
     //User should be logged out
@@ -65,12 +69,33 @@ public class FirstTask extends Base {
     //User should be in logged in state
 
     @Test(priority = 8)
-    public void login() {
-        createPage.closeUsingInstrumentWindow();
-        Assert.assertTrue(createPage.isUsingInstrumentWindowClose());
-        createPage.openPhotos();
-        Assert.assertTrue(createPage.isPhotosDisplay());
-        createPage.clickInAnyPhoto();
+    public void signUpWithCreateFreeAccount() {
+        picsartBasePage = new PicsartBasePage(getBrowser());
+        picsartBasePage.openSignUpWindow();
+        Assert.assertTrue(picsartBasePage.isSignUpWindowDisplay());
+        picsartBasePage.signUpWithCreateFreeAccount();
+        picsartBasePage.clickCreateFreeAccountButton();
+        Assert.assertTrue(picsartBasePage.isSignUpWindowClosed());
     }
 
+    @Test(priority = 9, dependsOnMethods = "signUpWithCreateFreeAccount")
+    public void navigateToAccountSettings() {
+        Assert.assertTrue(picsartBasePage.isAccountAvatarShow());
+        picsartBasePage.hoverToAvatar();
+        Assert.assertTrue(picsartBasePage.isAccountPopupWindowShow());
+        settingsPage = picsartBasePage.hoverAndClickTheSettingsButton();
+        Assert.assertTrue(settingsPage.isAccountSettingsPage());
+    }
+
+    @Test(priority = 10, dependsOnMethods = "navigateToAccountSettings")
+    public void checkThatUploadContainerIsDisplayCorrect() {
+        Assert.assertTrue(settingsPage.isUploadButtonShow());
+        Assert.assertTrue(settingsPage.isUploadDescriptionCorrect("You can upload jpg. or png image files. Max size 2mb."));
+    }
+
+    @Test(priority = 11, dependsOnMethods = "checkThatUploadContainerIsDisplayCorrect")
+    public void uploadImageAndSave() {
+        settingsPage.uploadImage();
+        settingsPage.clickSaveChangeButton();
+    }
 }

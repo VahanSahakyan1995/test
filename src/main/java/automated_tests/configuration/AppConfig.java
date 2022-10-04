@@ -17,6 +17,14 @@ public final class AppConfig {
 
     private String createUrl;
 
+    private String settingsUrl;
+
+    private String imagePath;
+
+    private String accountEmail;
+
+    private String accountPassword;
+
     private String restAssuredUrl;
 
     private boolean headless;
@@ -28,8 +36,6 @@ public final class AppConfig {
     private long pageLoadTime;
 
     private long scriptTime;
-
-    private final List<FakePassword> fakePasswords = new ArrayList<>();
 
     private static AppConfig instance;
 
@@ -48,11 +54,14 @@ public final class AppConfig {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(getConfigName())) {
             Properties prop = new Properties();
             prop.load(input);
-            this.fakePasswords.add(new FakePassword());
+            this.accountEmail = prop.getProperty("account.email");
+            this.accountPassword = prop.getProperty("account.password");
             this.driverUrl = prop.getProperty("webdriver.path");
             this.restAssuredUrl = prop.getProperty("restAssured.url");
-            this.baseUrl = prop.getProperty("test.base.url");
-            this.createUrl = prop.getProperty("test.create.url");
+            this.baseUrl = prop.getProperty("picsart.base.url");
+            this.createUrl = prop.getProperty("picsart.create.url");
+            this.settingsUrl = prop.getProperty("picsart.settings.url");
+            this.imagePath = prop.getProperty("image.path");
             this.headless = Boolean.parseBoolean(prop.getProperty("webdriver.headless"));
             this.implicitTime = Long.parseLong(prop.getProperty("implicit.wait.time"));
             this.explicitTime = Long.parseLong(prop.getProperty("explicit.wait.time"));
@@ -88,16 +97,24 @@ public final class AppConfig {
         return createUrl;
     }
 
+    public String getSettingsUrl() {
+        return settingsUrl;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
     public boolean isHeadless() {
         return headless;
     }
 
-    public String getShortPassword1() {
-        return fakePasswords.get(0).getShort1();
+    public String getEmail() {
+        return accountEmail;
     }
 
-    public String getShortPassword2() {
-        return fakePasswords.get(0).getShort2();
+    public String getPassword() {
+        return accountPassword;
     }
 
     public long getImplicitTime() {

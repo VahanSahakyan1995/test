@@ -6,10 +6,13 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.springframework.util.ObjectUtils;
+
+import java.util.Random;
 
 @Log4j2
 @Getter
@@ -52,6 +55,31 @@ public class BasePage {
     protected void click(WebElement element) {
         element.click();
         waitForPageLoad();
+    }
+
+    protected void hover(WebElement element) {
+        Actions actions = new Actions(getBrowser().driver());
+        actions.moveToElement(element).perform();
+        waitForPageLoad();
+    }
+
+    protected void hoverAndClick(WebElement element) {
+        Actions actions = new Actions(getBrowser().driver());
+        actions.moveToElement(element).click().perform();
+        waitForPageLoad();
+    }
+
+    public String collectRandomAlphanumericString() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        return generatedString;
     }
 
     public void sleep(long time) {
