@@ -27,23 +27,26 @@ public class FirstTask extends Base {
     }
 
     @Test(priority = 4, dependsOnMethods = "clickSeeAllTemplates")
-    public void addFirstTemplate() {
-        createPage.clickInFirstTemplate();
+    public void addAnyTemplate() {
+        createPage.clickInAnyTemplate();
     }
 
-    @Test(priority = 5, dependsOnMethods = "navigateToTheCreatePage", retryAnalyzer = RetryAnalyzer.class)
+    @Test(priority = 5, dependsOnMethods = "navigateToTheCreatePage")
     public void changeBackground() {
         createPage.openBackground();
         createPage.changeBackground();
     }
 
-    @Test(priority = 5, dependsOnMethods = "navigateToTheCreatePage", retryAnalyzer = RetryAnalyzer.class)
-    public void addFirstSticker() {
-        createPage.sleep(1000000);
+    @Test(priority = 6, dependsOnMethods = "navigateToTheCreatePage")
+    public void addAnySticker() {
+        createPage.openStickers();
+        createPage.clickInAnySticker();
     }
 
-    @Test(priority = 6, dependsOnMethods = "navigateToTheCreatePage", retryAnalyzer = RetryAnalyzer.class)
-    public void addFirstPhoto() {
-        createPage.sleep(1000000);
+    @Test(priority = 7, dependsOnMethods = "navigateToTheCreatePage")
+    public void addAnyPhoto() {
+        createPage.closeUsingInstrumentWindow();
+        createPage.openPhotos();
+        createPage.clickInAnyPhoto();
     }
 }

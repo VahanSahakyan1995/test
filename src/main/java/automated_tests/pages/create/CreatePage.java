@@ -34,33 +34,48 @@ public class CreatePage extends BasePage {
     }
 
     public void openAllTemplates() {
-        if (getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='template-header']"))) {
-            click(getBrowser().untilElementToBeClickable(By.id("templates-category")));
-            getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='template-header']"));
-        }
+        click(getBrowser().untilElementToBeClickable(By.id("templates-category")));
+        getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='template-header']"));
     }
 
-    public void clickInFirstTemplate() {
-        click(getBrowser().untilElementToBeClickable(By.xpath("//*[@id=\"root\"]/div/main/div[1]/section/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/div/div[1]")));
+    public void clickInAnyTemplate() {
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-rbd-drag-handle-context-id='0']")));
     }
 
     public void openBackground() {
-        if (getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='background-section-header']"))) {
-            click(getBrowser().untilElementToBeClickable(By.id("background-category")));
-            getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='background-section-header']"));
-        }
+        click(getBrowser().untilElementToBeClickable(By.id("background-category")));
+        getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='background-section-header']"));
     }
 
     public void changeBackground() {
-        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-testid='color-clock-item']")));
+        click(getBrowser().untilElementToBeClickable(By.id("Texture")));
+        getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='texture-item-y2k_patterns']"));
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-testid='texture-item-y2k_patterns']")));
     }
 
     public void openStickers() {
         click(getBrowser().untilElementToBeClickable(By.id("stickers-category")));
-        getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='background-section-header']"));
+        getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='base-sidebar']"));
     }
 
-    public void clickFirstSticker() {
-        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-testid='color-clock-item']")));
+    public void clickInAnySticker() {
+        getBrowser().untilIsDisplayed(By.cssSelector("div[data-rbd-drag-handle-context-id='0']"));
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-rbd-drag-handle-context-id='0']")));
     }
+
+    public void openPhotos() {
+        click(getBrowser().untilElementToBeClickable(By.id("photos-category")));
+    }
+
+    public void closeUsingInstrumentWindow() {
+        getBrowser().untilIsDisplayed(By.cssSelector("button[data-testid='hints-close']"));
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-testid='hints-close']")));
+        Assert.assertTrue(getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='hints-main']")));
+    }
+
+    public void clickInAnyPhoto() {
+        getBrowser().untilIsDisplayed(By.cssSelector("div[data-rbd-drag-handle-context-id='0']"));
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-rbd-drag-handle-context-id='0']")));
+    }
+
 }
