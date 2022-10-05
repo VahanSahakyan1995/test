@@ -3,7 +3,6 @@ package automated_tests.pages.create;
 import automated_tests.browser.Browser;
 import automated_tests.configuration.AppConfig;
 import automated_tests.pages.base.BasePage;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,7 +12,7 @@ public class CreatePage extends BasePage {
         super(browser, AppConfig.getInstance().getCreateUrl(), true);
     }
 
-    public boolean isCookiesFooterShow() {
+    public boolean checkIfCookiesFooterIsShown() {
         return getBrowser().untilIsDisplayed(By.id("onetrust-accept-btn-handler"));
     }
 
@@ -21,21 +20,21 @@ public class CreatePage extends BasePage {
         click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-testid='hints-close']")));
     }
 
-    public boolean isCookiesFooterClose(){
+    public boolean checkIfCookiesFooterIsClosed(){
         return getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='hints-main']"));
     }
 
-    public void clickAcceptAllCookies() {
-        if (isCookiesFooterShow()) {
+    public void clickOnAcceptAllCookies() {
+        if (checkIfCookiesFooterIsShown()) {
             click(getBrowser().untilElementToBeClickable(By.id("onetrust-accept-btn-handler")));
         }
     }
 
-    public boolean isTourWindowClose(){
+    public boolean checkIfTourWindowIsClosed(){
         return getBrowser().untilIsNotDisplayed(By.id("onetrust-accept-btn-handler"));
     }
 
-    public void clickNewProject() {
+    public void clickOnNewProject() {
         click(getBrowser().untilElementToBeClickable(By.id("newProjectBtn")));
     }
 
@@ -43,11 +42,11 @@ public class CreatePage extends BasePage {
         click(getBrowser().untilElementToBeClickable(By.id("templates-category")));
     }
 
-    public boolean isAllTemplatesDisplay(){
+    public boolean checkIfAllTemplatesIsDisplayed(){
         return getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='template-header']"));
     }
 
-    public void clickInAnyTemplate() {
+    public void clickOnAnyTemplate() {
         click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-rbd-drag-handle-context-id='0']")));
     }
 
@@ -55,7 +54,7 @@ public class CreatePage extends BasePage {
         click(getBrowser().untilElementToBeClickable(By.id("background-category")));
     }
 
-    public boolean isBackgroundDisplay(){
+    public boolean checkIfBackgroundIsDisplayed(){
         return getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='background-section-header']"));
     }
 
@@ -69,11 +68,11 @@ public class CreatePage extends BasePage {
         click(getBrowser().untilElementToBeClickable(By.id("stickers-category")));
     }
 
-    public boolean isStickersDisplay(){
+    public boolean checkIfStickersIsDisplayed(){
         return getBrowser().untilIsDisplayed(By.cssSelector("div[data-testid='base-sidebar']"));
     }
 
-    public void clickInAnySticker() {
+    public void clickOnAnySticker() {
         getBrowser().untilIsDisplayed(By.cssSelector("div[data-rbd-drag-handle-context-id='0']"));
         click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-rbd-drag-handle-context-id='0']")));
     }
@@ -87,15 +86,15 @@ public class CreatePage extends BasePage {
         click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-testid='hints-close']")));
     }
 
-    public boolean isUsingInstrumentWindowClose(){
+    public boolean checkIfUsingInstrumentWindowIsClosed(){
         return getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='hints-main']"));
     }
 
-    public boolean isPhotosDisplay(){
+    public boolean checkIfPhotosIsDisplayed(){
         return getBrowser().untilIsDisplayed(By.cssSelector("div[data-rbd-drag-handle-context-id='0']"));
     }
 
-    public void clickInAnyPhoto() {
+    public void clickOnAnyPhoto() {
         click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-rbd-drag-handle-context-id='0']")));
     }
 

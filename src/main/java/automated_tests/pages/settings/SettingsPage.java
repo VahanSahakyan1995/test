@@ -13,15 +13,15 @@ public class SettingsPage extends BasePage {
         super(browser, AppConfig.getInstance().getSettingsUrl(), true);
     }
 
-    public boolean isAccountSettingsPage() {
+    public boolean checkIfAccountSettingsPageDisplayed() {
         return getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-testid='settings']"));
     }
 
-    public boolean isUploadButtonShow() {
+    public boolean checkIfUploadButtonShowed() {
         return getBrowser().untilIsDisplayed(By.cssSelector("label[for='upload-avatar']"));
     }
 
-    public boolean isUploadDescriptionCorrect() {
+    public boolean checkIfUploadDescriptionWriteCorrectly() {
         return pContains("You can upload jpg. or png image files. Max size 2mb.");
     }
 
@@ -30,11 +30,11 @@ public class SettingsPage extends BasePage {
         uploadAvatarImage.sendKeys(AppConfig.getInstance().getImagePath());
     }
 
-    public void clickSaveChangeButton() {
+    public void clickOnSaveChangeButton() {
         click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-test='save-changes-button']")));
     }
 
-    public boolean isSaveUploadImage() {
+    public boolean checkIfUploadedImageIsSaved() {
         sleep(1500);
         return !getBrowser().findElement(By.cssSelector("button[data-test='save-changes-button']")).isEnabled();
     }
