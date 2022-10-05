@@ -3,6 +3,7 @@ package automated_tests.pages.base;
 import automated_tests.browser.Browser;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,6 +68,16 @@ public class BasePage {
         Actions actions = new Actions(getBrowser().driver());
         actions.moveToElement(element).click().perform();
         waitForPageLoad();
+    }
+
+    public boolean pContains(String name) {
+        return getBrowser().untilIsDisplayed(By.xpath("//p[contains(text(), '" + name + "')]"));
+    }
+
+    public void scrollDown() {
+        JavascriptExecutor jse = (JavascriptExecutor) getBrowser().driver();
+        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        sleep(1000);
     }
 
     public String collectRandomAlphanumericString() {

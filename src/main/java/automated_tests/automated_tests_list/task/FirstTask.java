@@ -26,6 +26,7 @@ public class FirstTask extends Base {
         Assert.assertTrue(createPage.isTourWindowClose());
     }
 
+    //Use RetryAnalyzer because "New project" button did not exist
     @Test(priority = 2, dependsOnMethods = "navigateToTheCreatePage", retryAnalyzer = RetryAnalyzer.class)
     public void clickUnExcitableNewProjectButton() {
         createPage.clickNewProject();
@@ -69,16 +70,21 @@ public class FirstTask extends Base {
     //User should be in logged in state
 
     @Test(priority = 8)
-    public void signUpWithCreateFreeAccount() {
+    public void fillSignInWindow() {
         picsartBasePage = new PicsartBasePage(getBrowser());
-        picsartBasePage.openSignUpWindow();
-        Assert.assertTrue(picsartBasePage.isSignUpWindowDisplay());
-        picsartBasePage.signUpWithCreateFreeAccount();
-        picsartBasePage.clickCreateFreeAccountButton();
-        Assert.assertTrue(picsartBasePage.isSignUpWindowClosed());
+        picsartBasePage.openSignInWindow();
+        Assert.assertTrue(picsartBasePage.isSignInWindowDisplay());
+        picsartBasePage.signInWithCreateFreeAccount();
     }
 
-    @Test(priority = 9, dependsOnMethods = "signUpWithCreateFreeAccount")
+    //Use RetryAnalyzer because sometimes show "Bot behavior detected" error
+    @Test(priority = 9, dependsOnMethods = "fillSignInWindow", retryAnalyzer = RetryAnalyzer.class)
+    public void signInWithCreateFreeAccount() {
+        picsartBasePage.clickCreateFreeAccountButton();
+        Assert.assertTrue(picsartBasePage.isSignInWindowClosed());
+    }
+
+    @Test(priority = 10, dependsOnMethods = "signInWithCreateFreeAccount")
     public void navigateToAccountSettings() {
         Assert.assertTrue(picsartBasePage.isAccountAvatarShow());
         picsartBasePage.hoverToAvatar();
@@ -87,15 +93,22 @@ public class FirstTask extends Base {
         Assert.assertTrue(settingsPage.isAccountSettingsPage());
     }
 
-    @Test(priority = 10, dependsOnMethods = "navigateToAccountSettings")
+    @Test(priority = 11, dependsOnMethods = "navigateToAccountSettings")
     public void checkThatUploadContainerIsDisplayCorrect() {
         Assert.assertTrue(settingsPage.isUploadButtonShow());
-        Assert.assertTrue(settingsPage.isUploadDescriptionCorrect("You can upload jpg. or png image files. Max size 2mb."));
+        Assert.assertTrue(settingsPage.isUploadDescriptionCorrect());
     }
 
-    @Test(priority = 11, dependsOnMethods = "checkThatUploadContainerIsDisplayCorrect")
+    @Test(priority = 12, dependsOnMethods = "checkThatUploadContainerIsDisplayCorrect")
     public void uploadImageAndSave() {
         settingsPage.uploadImage();
+        settingsPage.scrollDown();
         settingsPage.clickSaveChangeButton();
+    }
+
+    //Use RetryAnalyzer because need time for correct work
+    @Test(priority = 13, dependsOnMethods = "uploadImageAndSave", retryAnalyzer = RetryAnalyzer.class)
+    public void checkThatImageIsUpload() {
+        Assert.assertTrue(settingsPage.isSaveUploadImage());
     }
 }

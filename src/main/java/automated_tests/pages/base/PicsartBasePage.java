@@ -13,35 +13,35 @@ public class PicsartBasePage extends BasePage{
         super(browser, AppConfig.getInstance().getBaseUrl(), true);
     }
 
-    public void openSignUpWindow() {
-        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-test='signup-button']")));
+    public void openSignInWindow() {
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-test='login-button']")));
     }
 
-    public boolean isSignUpWindowDisplay() {
-        return getBrowser().untilIsDisplayed(By.cssSelector("div[data-test='sign_up_form']"));
+    public boolean isSignInWindowDisplay() {
+        return getBrowser().untilIsDisplayed(By.cssSelector("div[data-test='sign_in_form']"));
     }
 
-    public void signUpWithCreateFreeAccount() {
-        WebElement accountEmailInputArea = getBrowser().findElement(By.cssSelector("input[aria-label='Enter email address']"));
+    public void signInWithCreateFreeAccount() {
+        WebElement accountEmailInputArea = getBrowser().findElement(By.cssSelector("input[aria-label='Enter username or email']"));
         accountEmailInputArea.sendKeys(AppConfig.getInstance().getEmail());
-        WebElement accountPasswordInputArea = getBrowser().findElement(By.cssSelector("input[data-testid='popper-button']"));
+        WebElement accountPasswordInputArea = getBrowser().findElement(By.cssSelector("input[aria-label='Enter password']"));
         accountPasswordInputArea.sendKeys(AppConfig.getInstance().getPassword());
     }
 
     public void clickCreateFreeAccountButton() {
-        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-test='signup']")));
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-test='login']")));
     }
 
-    public boolean isSignUpWindowClosed() {
-        return getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-test='sign_up_form']"));
+    public boolean isSignInWindowClosed() {
+        return getBrowser().untilIsNotDisplayed(By.cssSelector("div[data-test='sign_in_form']"));
     }
 
     public boolean isAccountAvatarShow() {
-        return getBrowser().untilIsDisplayed(By.cssSelector("img[data-testid='header-profile-user-avatar']"));
+        return getBrowser().untilIsDisplayed(By.xpath("//img[@title ='User avatar']"));
     }
 
     public void hoverToAvatar() {
-        hover(getBrowser().findElement(By.cssSelector("img[data-testid='header-profile-user-avatar']")));
+        hover(getBrowser().findElement(By.xpath("//img[@title ='User avatar']")));
     }
 
     public boolean isAccountPopupWindowShow() {
@@ -49,7 +49,7 @@ public class PicsartBasePage extends BasePage{
     }
 
     public SettingsPage hoverAndClickTheSettingsButton() {
-        hoverAndClick(getBrowser().untilElementToBeClickable(By.cssSelector("img[data-testid='header-profile-user-avatar']")));
+        hoverAndClick(getBrowser().untilElementToBeClickable(By.cssSelector("a[data-test='settings-button']")));
         return new SettingsPage(getBrowser());
     }
 

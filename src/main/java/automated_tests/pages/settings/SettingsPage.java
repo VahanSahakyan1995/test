@@ -18,11 +18,11 @@ public class SettingsPage extends BasePage {
     }
 
     public boolean isUploadButtonShow() {
-        return getBrowser().findElement(By.cssSelector("label[for='upload-avatar']")).isDisplayed();
+        return getBrowser().untilIsDisplayed(By.cssSelector("label[for='upload-avatar']"));
     }
 
-    public boolean isUploadDescriptionCorrect(String uploadDescription) {
-        return getBrowser().findElement(By.className("user-avatar-description-")).getText().equals(uploadDescription);
+    public boolean isUploadDescriptionCorrect() {
+        return pContains("You can upload jpg. or png image files. Max size 2mb.");
     }
 
     public void uploadImage(){
@@ -31,6 +31,11 @@ public class SettingsPage extends BasePage {
     }
 
     public void clickSaveChangeButton() {
-        click(getBrowser().untilElementToBeClickable(By.cssSelector("div[data-testid='save-changes-button']")));
+        click(getBrowser().untilElementToBeClickable(By.cssSelector("button[data-test='save-changes-button']")));
+    }
+
+    public boolean isSaveUploadImage() {
+        sleep(1500);
+        return !getBrowser().findElement(By.cssSelector("button[data-test='save-changes-button']")).isEnabled();
     }
 }
