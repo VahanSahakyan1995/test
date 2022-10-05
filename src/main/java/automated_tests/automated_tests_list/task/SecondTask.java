@@ -23,7 +23,7 @@ public class SecondTask extends Base {
                 //verify JSON Schema
                 .then().assertThat().statusCode(200)
                 .body(JsonSchemaValidator.
-                        matchesJsonSchema(new File("C:\\Users\\Admin\\Picsart Task\\test\\src\\main\\resources\\files\\schema.json")));
+                        matchesJsonSchema(new File(AppConfig.getInstance().getRestAssuredJsonPath())));
     }
 
 }

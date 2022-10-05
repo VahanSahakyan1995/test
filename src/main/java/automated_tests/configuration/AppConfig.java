@@ -27,6 +27,8 @@ public final class AppConfig {
 
     private String restAssuredUrl;
 
+    private String restAssuredJsonPath;
+
     private boolean headless;
 
     private long implicitTime;
@@ -58,6 +60,7 @@ public final class AppConfig {
             this.accountPassword = prop.getProperty("account.password");
             this.driverUrl = prop.getProperty("webdriver.path");
             this.restAssuredUrl = prop.getProperty("restAssured.url");
+            this.restAssuredJsonPath = prop.getProperty("restAssured.jsonpath");
             this.baseUrl = prop.getProperty("picsart.base.url");
             this.createUrl = prop.getProperty("picsart.create.url");
             this.settingsUrl = prop.getProperty("picsart.settings.url");
@@ -87,6 +90,10 @@ public final class AppConfig {
 
     public String getRestAssuredUrl() {
         return restAssuredUrl;
+    }
+
+    public String getRestAssuredJsonPath() {
+        return restAssuredJsonPath;
     }
 
     public String getBaseUrl() {
