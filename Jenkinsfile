@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'make'
+                bat 'make'
                 archiveArtifacts artifacts: '**/test_runner_xml_file/*.jar', fingerprint: true
             }
         }
