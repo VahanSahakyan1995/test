@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                      for (String xml : getXmlFiles('test_runner_xml_file')) {
-                         sh "java -Dspring.profiles.active=integration -jar test/build/libs/test-0.1.0.jar test_runner_xml_file/$xml || true"
+                         bat "java -Dspring.profiles.active=integration -jar test/build/libs/test-0.1.0.jar test_runner_xml_file/$xml || true"
                      }
                 }
             }
