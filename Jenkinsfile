@@ -72,8 +72,8 @@ pipeline {
    stages {
       stage('Say Hello') {
          steps {
-         git 'https://https://github.com/VahanSahakyan1995/test.git'
-//             echo 'Hello World!'
+//          git 'https://https://github.com/VahanSahakyan1995/test.git'
+            echo 'Hello World!'
          }
       }
    }
