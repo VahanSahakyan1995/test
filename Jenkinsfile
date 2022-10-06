@@ -31,6 +31,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
  }
 
+stages {
     stage('Build') {
       steps {
           echo 'Building..'
@@ -68,5 +69,5 @@ pipeline {
       sh("sendMessage 60585ac798fe9065f52135e7 \"Status:  ${currentBuild.currentResult}\"")
     }
   }
-
+}
 }
