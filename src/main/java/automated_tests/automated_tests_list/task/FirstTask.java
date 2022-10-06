@@ -32,32 +32,37 @@ public class FirstTask extends Base {
         createPage.clickOnNewProject();
     }
 
-    @Test(priority = 3, dependsOnMethods = "navigateToCreatePage")
+    @Test(priority = 3, dependsOnMethods = "navigateToCreatePage", retryAnalyzer = RetryAnalyzer.class)
+    public void checkIfRegistrationPopupWindowDisplayed() {
+        Assert.assertTrue(createPage.checkIfRegistrationPopupWindowDisplayed());
+    }
+
+    @Test(priority = 4, dependsOnMethods = "navigateToCreatePage")
     public void clickOnSeeAllTemplates() {
         createPage.openAllTemplates();
         Assert.assertTrue(createPage.checkIfAllTemplatesIsDisplayed());
     }
 
-    @Test(priority = 4, dependsOnMethods = "clickOnSeeAllTemplates")
+    @Test(priority = 5, dependsOnMethods = "clickOnSeeAllTemplates")
     public void addAnyTemplate() {
         createPage.clickOnAnyTemplate();
     }
 
-    @Test(priority = 5, dependsOnMethods = "navigateToCreatePage")
+    @Test(priority = 6, dependsOnMethods = "navigateToCreatePage")
     public void changeBackground() {
         createPage.openBackground();
         Assert.assertTrue(createPage.checkIfBackgroundIsDisplayed());
         createPage.changeBackground();
     }
 
-    @Test(priority = 6, dependsOnMethods = "navigateToCreatePage")
+    @Test(priority = 7, dependsOnMethods = "navigateToCreatePage")
     public void addAnySticker() {
         createPage.openStickers();
         Assert.assertTrue(createPage.checkIfStickersIsDisplayed());
         createPage.clickOnAnySticker();
     }
 
-    @Test(priority = 7, dependsOnMethods = "navigateToCreatePage")
+    @Test(priority = 8, dependsOnMethods = "navigateToCreatePage")
     public void addAnyPhoto() {
         createPage.closeUsingInstrumentWindow();
         Assert.assertTrue(createPage.checkIfUsingInstrumentWindowIsClosed());
@@ -66,10 +71,15 @@ public class FirstTask extends Base {
         createPage.clickOnAnyPhoto();
     }
 
+    @Test(priority = 9, dependsOnMethods = "navigateToCreatePage", retryAnalyzer = RetryAnalyzer.class)
+    public void checkAgainIfRegistrationPopupWindowDisplayed() {
+        Assert.assertTrue(createPage.checkIfRegistrationPopupWindowDisplayed());
+    }
+
     //Precondition
     //User should be in logged in state
 
-    @Test(priority = 8)
+    @Test(priority = 10)
     public void fillSignInWindow() {
         picsartBasePage = new PicsartBasePage(getBrowser());
         picsartBasePage.openSignInWindow();
@@ -78,13 +88,13 @@ public class FirstTask extends Base {
     }
 
     //Use RetryAnalyzer because sometimes it shows "Bot behavior detected" error
-    @Test(priority = 9, dependsOnMethods = "fillSignInWindow", retryAnalyzer = RetryAnalyzer.class)
+    @Test(priority = 11, dependsOnMethods = "fillSignInWindow", retryAnalyzer = RetryAnalyzer.class)
     public void signInWithCreateFreeAccount() {
         picsartBasePage.clickOnCreateFreeAccountButton();
         Assert.assertTrue(picsartBasePage.checkIfSignInWindowIsClosed());
     }
 
-    @Test(priority = 10, dependsOnMethods = "signInWithCreateFreeAccount")
+    @Test(priority = 12, dependsOnMethods = "signInWithCreateFreeAccount")
     public void navigateToAccountSettings() {
         Assert.assertTrue(picsartBasePage.checkIfAccountAvatarShowed());
         picsartBasePage.hoverToAvatar();
@@ -93,13 +103,13 @@ public class FirstTask extends Base {
         Assert.assertTrue(settingsPage.checkIfAccountSettingsPageDisplayed());
     }
 
-    @Test(priority = 11, dependsOnMethods = "navigateToAccountSettings")
+    @Test(priority = 13, dependsOnMethods = "navigateToAccountSettings")
     public void checkIfUploadContainerIsDisplayedCorrectly() {
         Assert.assertTrue(settingsPage.checkIfUploadButtonShowed());
         Assert.assertTrue(settingsPage.checkIfUploadDescriptionWriteCorrectly());
     }
 
-    @Test(priority = 12, dependsOnMethods = "checkIfUploadContainerIsDisplayedCorrectly")
+    @Test(priority = 14, dependsOnMethods = "checkIfUploadContainerIsDisplayedCorrectly")
     public void uploadImageAndSave() {
         settingsPage.uploadImage();
         settingsPage.scrollDown();
@@ -107,7 +117,7 @@ public class FirstTask extends Base {
     }
 
     //Use RetryAnalyzer because it needs time to check
-    @Test(priority = 13, dependsOnMethods = "uploadImageAndSave", retryAnalyzer = RetryAnalyzer.class)
+    @Test(priority = 15, dependsOnMethods = "uploadImageAndSave", retryAnalyzer = RetryAnalyzer.class)
     public void checkIfImageWasSuccessfullyUploaded() {
         Assert.assertTrue(settingsPage.checkIfUploadedImageIsSaved());
     }

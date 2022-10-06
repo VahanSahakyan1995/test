@@ -38,6 +38,10 @@ public class CreatePage extends BasePage {
         click(getBrowser().untilElementToBeClickable(By.id("newProjectBtn")));
     }
 
+    public boolean checkIfRegistrationPopupWindowDisplayed(){
+        return getBrowser().untilIsDisplayed(By.cssSelector("div[data-test='sign_up_form']"));
+    }
+
     public void openAllTemplates() {
         click(getBrowser().untilElementToBeClickable(By.id("templates-category")));
     }
