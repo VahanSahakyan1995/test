@@ -25,7 +25,6 @@ pipeline {
  agent any
 
  options {
-    ansiColor('xterm')
     skipStagesAfterUnstable()
     disableConcurrentBuilds()
     buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -64,10 +63,5 @@ stages {
       }
     }
 
-  post {
-    always {
-      sh("sendMessage 60585ac798fe9065f52135e7 \"Status:  ${currentBuild.currentResult}\"")
-    }
-  }
 }
 }
